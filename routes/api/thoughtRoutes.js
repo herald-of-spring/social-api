@@ -3,6 +3,7 @@ const {
   getThoughts,
   getOneThought,
   createThought,
+  updateThought,
   deleteThought,
   addReaction,
   removeReaction,
