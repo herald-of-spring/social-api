@@ -39,8 +39,23 @@ module.exports = {
   },
 
   addFriend(req, res) {
-    User.
+    User.findOne({ _id: req.params.friendId })
+      .then((friend) => friend 
+        ? User.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $addToSet: { friends: req.params.friendId } },
+          { new: true })
+        : res.status(404).json({ message: 'Invalid friend ID' }))
+      .then((user) => user ? res.json(user) : res.status(404).json({ message: 'Invalid user ID' }))
+      .catch((err) => res.status(500).json(err));
   },
 
-  removeFriend
+  removeFriend(req, res) {
+    User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendId } },
+        { new: true })
+      .then((user) => user ? res.json(user) : res.status(404).json({ message: 'Invalid user ID' }))
+      .catch((err) => res.status(500).json(err));
+  },
 };
