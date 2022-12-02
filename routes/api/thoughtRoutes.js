@@ -27,6 +27,11 @@ router.route('/:thoughtId')
   .delete(deleteThought);
 
 // /api/thoughts/:thoughtId/reactions
+// POST body format:
+// {
+//   "reactionBody": "Wow!",
+//   "username": "Lernantino"
+// }
 router.route('/:thoughtId/reactions').post(addReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId

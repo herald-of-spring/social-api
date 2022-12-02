@@ -7,7 +7,7 @@ connection.once('open', async () => {
   await User.deleteMany({});
   await Thought.deleteMany({});
 
-  await User.insertMany([{
+  await User.collection.insertMany([{
     username: "Soraya",
     email: "soraya@example.com"
   }, {
